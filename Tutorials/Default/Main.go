@@ -31,9 +31,21 @@ func StartTutorial() {
 	//sumPositiv := SumCriteria(slice, IsPositiv)
 	//fmt.Println(sumPositiv)
 
-	f := Square()
-	fmt.Println(f())
-	fmt.Println(f())
+	//f := Square()
+	//fmt.Println(f())
+	//fmt.Println(f())
+
+	//fmt.Println(Factorial(4))
+	//fmt.Println(Fibonacci(4))
+
+	//defer Finish()
+	//fmt.Println(`Start`)
+	//fmt.Println(Divide(15, 0))
+
+	//Slice()
+	//Map()
+
+	Pointers()
 }
 
 func Hello() {
@@ -109,4 +121,101 @@ func Square() func() int {
 		x++
 		return x * x
 	}
+}
+
+func Factorial(n int) int {
+	if n == 0 {
+		return 1
+	}
+	return n * Factorial(n-1)
+}
+
+func Fibonacci(x int) int {
+	if x == 0 {
+		return 0
+	}
+	if x == 1 {
+		return 1
+	}
+	return Fibonacci(x-1) + Fibonacci(x-2)
+}
+
+func Finish() {
+	defer fmt.Println(`Finish end`)
+	fmt.Println(`Finish start`)
+}
+
+func Divide(x, y int) int {
+	if y == 0 {
+		panic(`Division by zero`)
+	}
+	return x / y
+}
+
+func Slice() {
+	initialUsers := [8]string{"Bob", "Alice", "Kate", "Sam", "Tom", "Paul", "Mike", "Robert"}
+	users := initialUsers[2:7]
+	fmt.Println(users)
+	users = append(users[:1], users[3:]...)
+	fmt.Println(users)
+}
+
+func Map() {
+	var people = map[string]int{
+		"Bob":   1,
+		"Alice": 2,
+		"Kate":  3,
+		"Sam":   4,
+	}
+	fmt.Println(people["Alice"])
+	fmt.Println(people["Bob"])
+	people["Bob"] = 5
+	fmt.Println(people["Bob"])
+
+	if val, ok := people["Kate"]; ok {
+		fmt.Println(val)
+	}
+
+	for key, value := range people {
+		fmt.Println(key, value)
+	}
+	delete(people, "Bob")
+	fmt.Println(people)
+}
+
+func Pointers() {
+	var x int = 4
+	var p *int
+	p = &x
+	fmt.Println(p)
+	fmt.Println(*p)
+	*p = 10
+	fmt.Println(x)
+
+	x = 4
+	fmt.Println("x before:", x)
+	ChangeValue(&x)
+	fmt.Println("x after:", x)
+	var people = map[string]int{
+		"Bob":   1,
+		"Alice": 2,
+		"Kate":  3,
+		"Sam":   4,
+	}
+	fmt.Println(people)
+	ChangeMap(people)
+	fmt.Println(people)
+}
+
+func ChangeValue(x *int) {
+	*x = 15
+}
+
+func ChangeMap(values map[string]int) {
+	if val, ok := values[`Bob`]; ok {
+		val = 10
+		fmt.Println(val)
+		values[`Bob`] = 10
+	}
+	delete(values, `Sam`)
 }
