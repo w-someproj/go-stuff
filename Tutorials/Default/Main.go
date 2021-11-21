@@ -1,6 +1,9 @@
 package main
 
-import "Repos/Tutorials/Default/trivial"
+import (
+	"Repos/Tutorials/Default/trivial"
+	"fmt"
+)
 
 func main() {
 	StartTutorial()
@@ -8,11 +11,13 @@ func main() {
 
 //don`t clutter main)
 func StartTutorial() {
-	trivial.Trivial()
-	trivial.Functions()
-	trivial.Recursion()
-	trivial.DataStructures()
-	trivial.Pointers()
-	trivial.Structs()
-	trivial.Interfaces()
+	//trivial.Trivial()
+	//trivial.Functions()
+	//trivial.Recursion()
+	//trivial.DataStructures()
+	//trivial.Pointers()
+	//trivial.Structs()
+	//trivial.Interfaces()
+	trivial.Goroutines()
+	fmt.Println(`End`)
 }
