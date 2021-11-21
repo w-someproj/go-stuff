@@ -14,4 +14,5 @@ func StartTutorial() {
 	trivial.DataStructures()
 	trivial.Pointers()
 	trivial.Structs()
+	trivial.Interfaces()
 }
