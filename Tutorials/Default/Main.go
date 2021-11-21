@@ -18,6 +18,7 @@ func StartTutorial() {
 	//trivial.Pointers()
 	//trivial.Structs()
 	//trivial.Interfaces()
-	trivial.Goroutines()
-	fmt.Println(`End`)
+	//trivial.Goroutines()
+	trivial.Flow()
+	fmt.Println(`End Main`)
 }
