@@ -3,7 +3,7 @@ package trivial
 import "fmt"
 
 func Structs() {
-	tom := Person{Name: `Tom`, Age: 24, Contact: ContactInfo{}}
+	tom := Person{Name: `Tom`, Age: 24}
 	bob := Person{Name: `Bob`, Age: 24}
 	fmt.Println(tom.Name)
 	fmt.Println(bob)
@@ -14,18 +14,16 @@ func Structs() {
 	fmt.Println(tom.Age)
 	tom.Email = `tom`
 	fmt.Println(tom.Email)
-	tom.Contact.Email = `supertom`
-	fmt.Println(tom.Email)
 	tom.Print()
 	tom.ChangeAge(17)
 	tom.Print()
 }
 
 type Person struct {
-	Name string
-	Age  int
+	Name   string
+	Age    int
+	Weight float64
 	ContactInfo
-	Contact ContactInfo
 }
 
 type ContactInfo struct {

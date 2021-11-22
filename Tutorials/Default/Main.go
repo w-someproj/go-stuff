@@ -11,14 +11,14 @@ func main() {
 
 //don`t clutter main)
 func StartTutorial() {
-	//trivial.Trivial()
-	//trivial.Functions()
-	//trivial.Recursion()
-	//trivial.DataStructures()
-	//trivial.Pointers()
-	//trivial.Structs()
-	//trivial.Interfaces()
-	//trivial.Goroutines()
+	trivial.Trivial()
+	trivial.Functions()
+	trivial.Recursion()
+	trivial.DataStructures()
+	trivial.Pointers()
+	trivial.Structs()
+	trivial.Interfaces()
+	trivial.Goroutines()
 	trivial.Flow()
 	fmt.Println(`End Main`)
 }
