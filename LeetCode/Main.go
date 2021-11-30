@@ -3,9 +3,8 @@ package main
 import "fmt"
 
 func main() {
-	nums := []int{3, 3}
-	target := 6
-	fmt.Println(twoSum(nums, target))
+	fmt.Println(twoSum([]int{2, 7, 11, 15}, 9))
+
 }
 
 // optimized
