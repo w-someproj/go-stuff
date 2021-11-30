@@ -3,17 +3,19 @@ package main
 import "fmt"
 
 func main() {
-	nums := []int{2, 7, 11, 15}
-	target := 9
+	nums := []int{3, 3}
+	target := 6
 	fmt.Println(twoSum(nums, target))
 }
 
+// optimized
 func twoSum(nums []int, target int) []int {
+	sumMap := make(map[int]int)
 	for i, elem := range nums {
-		for j := i + 1; j < len(nums); j++ {
-			if (elem + nums[j]) == target {
-				return []int{i, j}
-			}
+		if elIndex, ok := sumMap[(target - elem)]; ok {
+			return []int{elIndex, i}
+		} else {
+			sumMap[elem] = i
 		}
 	}
 	return []int{}
