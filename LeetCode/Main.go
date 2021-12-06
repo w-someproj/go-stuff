@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 type ListNode struct {
 	Val  int
@@ -10,7 +13,8 @@ type ListNode struct {
 func main() {
 	//fmt.Println(twoSum([]int{2, 7, 11, 15}, 9))
 	//PrintFullNode(addTwoNumbers(GetTwoIntNodes()))
-	fmt.Println(lengthOfLongestSubstring(`pwwkew`))
+	//fmt.Println(lengthOfLongestSubstring(`pwwkew`))
+	fmt.Println(findMedianSortedArrays([]int{1, 2}, []int{3, 4}))
 
 }
 
@@ -59,7 +63,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	return head
 }
 
-// (medium - topics : hash table,string, sliding window)
+// (medium - topics: hash table,string, sliding window)
 func lengthOfLongestSubstring(s string) int {
 	mapStr := make(map[uint8]bool)
 	start, end, max := 0, 0, 0
@@ -76,6 +80,19 @@ func lengthOfLongestSubstring(s string) int {
 		}
 	}
 	return max
+}
+
+// need rewrite with this build-in stuff (hard - topics: array, binary search, divide and conquer)
+func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
+	res := append(nums1, nums2...)
+	sort.Ints(res)
+	var median float64
+	if len(res)%2 == 0 {
+		median = float64(res[int((len(res)-1)/2)]+res[int((len(res))/2)]) / 2.
+	} else {
+		median = float64(res[(len(res) / 2)])
+	}
+	return median
 }
 
 // utility fuctions
