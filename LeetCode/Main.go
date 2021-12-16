@@ -14,7 +14,8 @@ func main() {
 	//fmt.Println(twoSum([]int{2, 7, 11, 15}, 9))
 	//PrintFullNode(addTwoNumbers(GetTwoIntNodes()))
 	//fmt.Println(lengthOfLongestSubstring(`pwwkew`))
-	fmt.Println(findMedianSortedArrays([]int{1, 2}, []int{3, 4}))
+	//fmt.Println(findMedianSortedArrays([]int{1, 2}, []int{3, 4}))
+	fmt.Println(longestPalindrome(`cabcbad`))
 
 }
 
@@ -82,7 +83,7 @@ func lengthOfLongestSubstring(s string) int {
 	return max
 }
 
-// need rewrite with this build-in stuff (hard - topics: array, binary search, divide and conquer)
+// need rewrite without this build-in stuff (hard - topics: array, binary search, divide and conquer)
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	res := append(nums1, nums2...)
 	sort.Ints(res)
@@ -93,6 +94,54 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 		median = float64(res[(len(res) / 2)])
 	}
 	return median
+}
+
+// (medium - topics: string, dynamic programming)
+/*
+cabcbad
+1	0	0	1	0	0 	0
+	1	0 	0	0	1	0
+		1	0	1	0	0
+			1	0	0	0
+				1	0	0
+					1	0
+						1
+*/
+func longestPalindrome(s string) string {
+	if s == `` {
+		return s
+	}
+	strLen := len(s)
+	// create palindrome matrix (need top-right)
+	isPalindromeMatrix := make([][]int, strLen)
+	for i := range isPalindromeMatrix {
+		isPalindromeMatrix[i] = make([]int, strLen)
+		isPalindromeMatrix[i][i] = 1
+	}
+
+	maxLen := 1     // palindrome length for result
+	startIndex := 0 // palindrome start
+
+	for plen := 2; plen <= strLen; plen++ {
+		for i := 0; i <= strLen-plen; i++ {
+			j := i + plen - 1
+			if s[i] == s[j] {
+				if plen == 2 {
+					isPalindromeMatrix[i][j] = 1
+					maxLen = 2
+					startIndex = i
+				} else {
+					if isPalindromeMatrix[i+1][j-1] == 1 {
+						isPalindromeMatrix[i][j] = 1
+						maxLen = plen
+						startIndex = i
+					}
+				}
+			}
+		}
+	}
+
+	return s[startIndex:(startIndex + maxLen)]
 }
 
 // utility fuctions
