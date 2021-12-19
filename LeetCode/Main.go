@@ -23,7 +23,8 @@ func main() {
 	//fmt.Println(isPalindrome(121))
 	//fmt.Println(maxArea([]int{1, 8, 6, 2, 5, 4, 8, 3, 7}))
 	//fmt.Println(intToRoman(1994))
-	fmt.Println(romanToInt(`MCMXCIV`))
+	//fmt.Println(romanToInt(`MCMXCIV`))
+	fmt.Println(longestCommonPrefix([]string{"flower", "flow", "flight"}))
 
 }
 
@@ -361,6 +362,23 @@ func romanToInt(s string) int {
 			result += currVal
 		}
 		prevVal = currVal
+	}
+	return result
+}
+
+//Longest Common Prefix (easy - topics: string)
+// leetcode said nice
+func longestCommonPrefix(strs []string) string {
+	result := strs[0]
+	for _, str := range strs {
+		for i := range result {
+			if i <= (len(result)-1) && i <= (len(str)-1) && str[i] == result[i] {
+				// all nice
+			} else {
+				result = result[0:i]
+				break
+			}
+		}
 	}
 	return result
 }
