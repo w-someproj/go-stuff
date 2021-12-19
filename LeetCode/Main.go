@@ -20,7 +20,8 @@ func main() {
 	//fmt.Println(longestPalindrome(`cabcbad`))
 	//fmt.Println(convert(`AB`, 1))
 	//fmt.Println(reverse(-123))
-	fmt.Println(isPalindrome(121))
+	//fmt.Println(isPalindrome(121))
+	fmt.Println(maxArea([]int{1, 8, 6, 2, 5, 4, 8, 3, 7}))
 
 }
 
@@ -237,6 +238,36 @@ func isPalindromeV(x int) bool {
 		}
 	}
 	return true
+}
+
+//(10)Regular Expression Matching (hard - topics: string, dynamic programming, recursion)
+//solve later
+func isMatch(s string, p string) bool {
+	return true
+}
+
+//Container With Most Water (medium - topics: array, two pointers, greedy)
+// go from both sides (max width) to find heighest lines with biggest area
+func maxArea(height []int) int {
+	result, l := 0, 0
+	r := len(height) - 1
+	currArrea := 0
+	for l < r {
+		if height[l] < height[r] {
+			currArrea = height[l] * (r - l)
+		} else {
+			currArrea = height[r] * (r - l)
+		}
+		if result < currArrea {
+			result = currArrea
+		}
+		if height[l] < height[r] {
+			l++
+		} else {
+			r--
+		}
+	}
+	return result
 }
 
 // utility fuctions
