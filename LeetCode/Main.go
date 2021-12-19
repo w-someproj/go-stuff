@@ -22,7 +22,8 @@ func main() {
 	//fmt.Println(reverse(-123))
 	//fmt.Println(isPalindrome(121))
 	//fmt.Println(maxArea([]int{1, 8, 6, 2, 5, 4, 8, 3, 7}))
-	fmt.Println(intToRoman(1994))
+	//fmt.Println(intToRoman(1994))
+	fmt.Println(romanToInt(`MCMXCIV`))
 
 }
 
@@ -320,6 +321,48 @@ func intToRoman(num int) string {
 	}
 
 	return strings.Join(result, ``)
+}
+
+// Roman to Integer (easy - topics: hash table, math, string)
+func romanToInt(s string) int {
+	result := 0
+	prevVal := 0
+	for i := len(s) - 1; i >= 0; i-- {
+		currVal := 0
+		switch string(s[i]) {
+		case `I`:
+			currVal = 1
+			break
+		case `V`:
+			currVal = 5
+			break
+		case `X`:
+			currVal = 10
+			break
+		case `L`:
+			currVal = 50
+			break
+		case `C`:
+			currVal = 100
+			break
+		case `D`:
+			currVal = 500
+			break
+		case `M`:
+			currVal = 1000
+			break
+		default:
+			currVal = 0
+			break
+		}
+		if currVal < prevVal {
+			result -= currVal
+		} else {
+			result += currVal
+		}
+		prevVal = currVal
+	}
+	return result
 }
 
 // utility fuctions
