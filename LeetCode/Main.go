@@ -24,7 +24,8 @@ func main() {
 	//fmt.Println(maxArea([]int{1, 8, 6, 2, 5, 4, 8, 3, 7}))
 	//fmt.Println(intToRoman(1994))
 	//fmt.Println(romanToInt(`MCMXCIV`))
-	fmt.Println(longestCommonPrefix([]string{"flower", "flow", "flight"}))
+	//fmt.Println(longestCommonPrefix([]string{"flower", "flow", "flight"}))
+	fmt.Println(threeSum([]int{0, 0, 0, 0}))
 
 }
 
@@ -379,6 +380,35 @@ func longestCommonPrefix(strs []string) string {
 		}
 	}
 	return result
+}
+
+//3Sum (medium - topics: array, two pointers, sorting)
+// look at topics => sort; why 2 pointers? - hint say smth about map
+func threeSum(nums []int) [][]int {
+	var res [][]int
+	// sort nums
+	sort.Ints(nums)
+	for i := range nums {
+		if i > 0 && nums[i] == nums[i-1] { // not contain duplicate triplets
+			continue
+		}
+		sumMap := make(map[int]int)
+		target := -nums[i]
+		j := i + 1
+		for j < len(nums) {
+			if elIndex, ok := sumMap[(target - nums[j])]; ok {
+				res = append(res, []int{nums[i], nums[elIndex], nums[j]})
+				j++
+				for j < len(nums) && nums[j] == nums[j-1] { // // not contain duplicate triplets
+					j++
+				}
+			} else {
+				sumMap[nums[j]] = j
+				j++
+			}
+		}
+	}
+	return res
 }
 
 // utility fuctions
