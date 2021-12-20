@@ -25,7 +25,7 @@ func main() {
 	//fmt.Println(intToRoman(1994))
 	//fmt.Println(romanToInt(`MCMXCIV`))
 	//fmt.Println(longestCommonPrefix([]string{"flower", "flow", "flight"}))
-	fmt.Println(threeSum([]int{0, 0, 0, 0}))
+	fmt.Println(threeSum([]int{-1, 0, 1, 2, -1, -4}))
 
 }
 
@@ -383,7 +383,7 @@ func longestCommonPrefix(strs []string) string {
 }
 
 //3Sum (medium - topics: array, two pointers, sorting)
-// look at topics => sort; why 2 pointers? - hint say smth about map
+// look at topics => sort; why 2 pointers? (hint say smth about map (shit or i do smth wrong)) - faster with 2 pointers
 func threeSum(nums []int) [][]int {
 	var res [][]int
 	// sort nums
@@ -392,19 +392,24 @@ func threeSum(nums []int) [][]int {
 		if i > 0 && nums[i] == nums[i-1] { // not contain duplicate triplets
 			continue
 		}
-		sumMap := make(map[int]int)
-		target := -nums[i]
-		j := i + 1
-		for j < len(nums) {
-			if elIndex, ok := sumMap[(target - nums[j])]; ok {
-				res = append(res, []int{nums[i], nums[elIndex], nums[j]})
-				j++
-				for j < len(nums) && nums[j] == nums[j-1] { // // not contain duplicate triplets
-					j++
-				}
+		l := i + 1
+		r := len(nums) - 1
+		for l < r {
+			sum := nums[i] + nums[l] + nums[r]
+			if sum > 0 {
+				r--
+			} else if sum < 0 {
+				l++
 			} else {
-				sumMap[nums[j]] = j
-				j++
+				res = append(res, []int{nums[i], nums[l], nums[r]})
+				for l < r && nums[l] == nums[l+1] {
+					l++
+				}
+				for l < r && nums[r] == nums[r-1] {
+					r--
+				}
+				l++
+				r--
 			}
 		}
 	}
