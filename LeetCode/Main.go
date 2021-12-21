@@ -25,7 +25,8 @@ func main() {
 	//fmt.Println(intToRoman(1994))
 	//fmt.Println(romanToInt(`MCMXCIV`))
 	//fmt.Println(longestCommonPrefix([]string{"flower", "flow", "flight"}))
-	fmt.Println(threeSum([]int{-1, 0, 1, 2, -1, -4}))
+	//fmt.Println(threeSum([]int{-1, 0, 1, 2, -1, -4}))
+	fmt.Println(threeSumClosest([]int{1, 1, -1, -1, 3}, 3))
 
 }
 
@@ -416,7 +417,43 @@ func threeSum(nums []int) [][]int {
 	return res
 }
 
+//3Sum Closest (medium - topics: array, two pointers, sorting)
+func threeSumClosest(nums []int, target int) int {
+	res := nums[0] + nums[1] + nums[2]
+	// sort nums
+	sort.Ints(nums)
+	for i := range nums {
+		if i > 0 && nums[i] == nums[i-1] { // don`t check same
+			continue
+		}
+		l := i + 1
+		r := len(nums) - 1
+		for l < r {
+			sum := nums[i] + nums[l] + nums[r]
+			if abs(sum-target) < abs(res-target) {
+				res = sum
+			}
+
+			if sum > target {
+				r--
+			} else if sum < target {
+				l++
+			} else {
+				return res
+			}
+		}
+	}
+	return res
+}
+
 // utility fuctions
+
+func abs(number int) int {
+	if number < 0 {
+		return -1 * number
+	}
+	return number
+}
 
 func GetTwoIntNodes() (*ListNode, *ListNode) {
 	node1_7 := ListNode{Val: 9}
