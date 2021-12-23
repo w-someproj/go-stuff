@@ -26,7 +26,8 @@ func main() {
 	//fmt.Println(romanToInt(`MCMXCIV`))
 	//fmt.Println(longestCommonPrefix([]string{"flower", "flow", "flight"}))
 	//fmt.Println(threeSum([]int{-1, 0, 1, 2, -1, -4}))
-	fmt.Println(threeSumClosest([]int{1, 1, -1, -1, 3}, 3))
+	//fmt.Println(threeSumClosest([]int{1, 1, -1, -1, 3}, 3))
+	fmt.Println(letterCombinations("23"))
 
 }
 
@@ -418,6 +419,7 @@ func threeSum(nums []int) [][]int {
 }
 
 //3Sum Closest (medium - topics: array, two pointers, sorting)
+//234
 func threeSumClosest(nums []int, target int) int {
 	res := nums[0] + nums[1] + nums[2]
 	// sort nums
@@ -444,6 +446,31 @@ func threeSumClosest(nums []int, target int) int {
 		}
 	}
 	return res
+}
+
+//Letter Combinations of a Phone Number (medium - topics: hash table, string, backtracking)
+var numMap = map[byte][]string{'1': {``}, '2': {`a`, `b`, `c`}, '3': {`d`, `e`, `f`},
+	'4': {`g`, `h`, `i`}, '5': {`j`, `k`, `l`}, '6': {`m`, `n`, `o`},
+	'7': {`p`, `q`, `r`, `s`}, '8': {`t`, `u`, `v`}, '9': {`w`, `x`, `y`, `z`}}
+
+func letterCombinations(digits string) []string {
+	var res []string
+	if len(digits) == 0 {
+		return nil
+	}
+	letterCombinationsRecursion(0, digits, "", &res)
+	return res
+}
+
+func letterCombinationsRecursion(i int, digits string, prevSequence string, res *[]string) {
+	if i == len(digits) {
+		*res = append(*res, prevSequence)
+		return
+	}
+	for _, v := range numMap[digits[i]] {
+		letterCombinationsRecursion(i+1, digits, prevSequence+string(v), res)
+	}
+	return
 }
 
 // utility fuctions
