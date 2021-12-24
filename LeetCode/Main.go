@@ -27,8 +27,8 @@ func main() {
 	//fmt.Println(longestCommonPrefix([]string{"flower", "flow", "flight"}))
 	//fmt.Println(threeSum([]int{-1, 0, 1, 2, -1, -4}))
 	//fmt.Println(threeSumClosest([]int{1, 1, -1, -1, 3}, 3))
-	fmt.Println(letterCombinations("23"))
-
+	//fmt.Println(letterCombinations("23"))
+	fmt.Println(fourSum([]int{2, 2, 2, 2, 2}, 8))
 }
 
 // optimized (ez - topics: array, hash table)
@@ -471,6 +471,44 @@ func letterCombinationsRecursion(i int, digits string, prevSequence string, res 
 		letterCombinationsRecursion(i+1, digits, prevSequence+string(v), res)
 	}
 	return
+}
+
+//4Sum (medium - topics: array, two pointers, sorting)
+func fourSum(nums []int, target int) [][]int {
+	var res [][]int
+	// sort nums
+	sort.Ints(nums)
+	for i := 0; i < len(nums); i++ {
+		if i > 0 && nums[i] == nums[i-1] { // not contain duplicate triplets
+			continue
+		}
+		for j := i + 1; j < len(nums); j++ {
+			if j > i+1 && nums[j] == nums[j-1] { // not contain duplicate triplets
+				continue
+			}
+			l := j + 1
+			r := len(nums) - 1
+			for l < r {
+				sum := nums[i] + nums[j] + nums[l] + nums[r]
+				if sum > target {
+					r--
+				} else if sum < target {
+					l++
+				} else {
+					res = append(res, []int{nums[i], nums[j], nums[l], nums[r]})
+					for l < r && nums[l] == nums[l+1] {
+						l++
+					}
+					for l < r && nums[r] == nums[r-1] {
+						r--
+					}
+					l++
+					r--
+				}
+			}
+		}
+	}
+	return res
 }
 
 // utility fuctions
