@@ -28,7 +28,8 @@ func main() {
 	//fmt.Println(threeSum([]int{-1, 0, 1, 2, -1, -4}))
 	//fmt.Println(threeSumClosest([]int{1, 1, -1, -1, 3}, 3))
 	//fmt.Println(letterCombinations("23"))
-	fmt.Println(fourSum([]int{2, 2, 2, 2, 2}, 8))
+	//fmt.Println(fourSum([]int{2, 2, 2, 2, 2}, 8))
+	fmt.Println(isValid(`({[][]})`))
 }
 
 // optimized (ez - topics: array, hash table)
@@ -509,6 +510,28 @@ func fourSum(nums []int, target int) [][]int {
 		}
 	}
 	return res
+}
+
+// Valid Parentheses (easy - topics: string, stack)
+func isValid(s string) bool {
+	if len(s)%2 == 1 {
+		return false
+	}
+	stack := []byte{}
+	pairs := map[byte]byte{
+		'(': ')',
+		'[': ']',
+		'{': '}',
+	}
+	for i := 0; i < len(s); i++ {
+		n := len(stack)
+		if n > 0 && pairs[stack[n-1]] == s[i] {
+			stack = stack[:n-1] // pop
+		} else {
+			stack = append(stack, s[i]) // push
+		}
+	}
+	return len(stack) == 0
 }
 
 // utility fuctions
