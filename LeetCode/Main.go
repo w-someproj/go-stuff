@@ -30,7 +30,8 @@ func main() {
 	//fmt.Println(letterCombinations("23"))
 	//fmt.Println(fourSum([]int{2, 2, 2, 2, 2}, 8))
 	//fmt.Println(isValid(`({[][]})`))
-	fmt.Println(generateParenthesis(2))
+	//fmt.Println(generateParenthesis(2))
+	fmt.Println(removeDuplicates([]int{1, 1, 2, 3, 3, 3}))
 }
 
 // optimized (ez - topics: array, hash table)
@@ -555,6 +556,24 @@ func generateParenthesisRecursion(result *[]string, parentheses string, left, ri
 		generateParenthesisRecursion(result, parentheses+")", left, right+1, max)
 	}
 
+}
+
+// Remove Duplicates from Sorted Array (easy - topics: array, two pointers)
+func removeDuplicates(nums []int) int {
+	if len(nums) <= 1 {
+		return len(nums)
+	}
+	i, j := 0, 1
+	for j < len(nums) {
+		if nums[i] == nums[j] {
+			j++
+		} else {
+			nums[i+1] = nums[j]
+			i++
+			j++
+		}
+	}
+	return i + 1
 }
 
 // utility fuctions
