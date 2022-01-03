@@ -31,7 +31,8 @@ func main() {
 	//fmt.Println(fourSum([]int{2, 2, 2, 2, 2}, 8))
 	//fmt.Println(isValid(`({[][]})`))
 	//fmt.Println(generateParenthesis(2))
-	fmt.Println(removeDuplicates([]int{1, 1, 2, 3, 3, 3}))
+	//fmt.Println(removeDuplicates([]int{1, 1, 2, 3, 3, 3}))
+	fmt.Println(removeElement([]int{0, 1, 2, 2, 3, 0, 4, 2}, 2))
 }
 
 // optimized (ez - topics: array, hash table)
@@ -574,6 +575,25 @@ func removeDuplicates(nums []int) int {
 		}
 	}
 	return i + 1
+}
+
+// Remove Element (easy - array, two pointers)
+func removeElement(nums []int, val int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+	res := len(nums)
+	i := 0
+	for i < len(nums) {
+		if nums[i] == val {
+			nums = append(nums[:i], nums[i+1:]...)
+			res--
+		} else {
+			i++
+		}
+
+	}
+	return res
 }
 
 // utility fuctions
