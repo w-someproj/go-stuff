@@ -32,7 +32,8 @@ func main() {
 	//fmt.Println(isValid(`({[][]})`))
 	//fmt.Println(generateParenthesis(2))
 	//fmt.Println(removeDuplicates([]int{1, 1, 2, 3, 3, 3}))
-	fmt.Println(removeElement([]int{0, 1, 2, 2, 3, 0, 4, 2}, 2))
+	//fmt.Println(removeElement([]int{0, 1, 2, 2, 3, 0, 4, 2}, 2))
+	fmt.Println(strStr(`a`, `a`))
 }
 
 // optimized (ez - topics: array, hash table)
@@ -594,6 +595,25 @@ func removeElement(nums []int, val int) int {
 
 	}
 	return res
+}
+
+// Implement strStr() (easy - two pointers, string, string matching)
+func strStr(haystack string, needle string) int {
+	if len(needle) == 0 {
+		return 0
+	}
+	for i := 0; i < len(haystack)-len(needle)+1; i++ {
+		j := 0
+		for ; j < len(needle); j++ {
+			if haystack[i+j] != needle[j] {
+				break
+			}
+		}
+		if j == len(needle) {
+			return i
+		}
+	}
+	return -1
 }
 
 // utility fuctions
