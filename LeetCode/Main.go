@@ -33,7 +33,7 @@ func main() {
 	//fmt.Println(generateParenthesis(2))
 	//fmt.Println(removeDuplicates([]int{1, 1, 2, 3, 3, 3}))
 	//fmt.Println(removeElement([]int{0, 1, 2, 2, 3, 0, 4, 2}, 2))
-	fmt.Println(strStr(`a`, `a`))
+	fmt.Println(strStrSubstr(`hello`, `ll`))
 }
 
 // optimized (ez - topics: array, hash table)
@@ -598,6 +598,7 @@ func removeElement(nums []int, val int) int {
 }
 
 // Implement strStr() (easy - two pointers, string, string matching)
+// compare by index - slow, use more memory
 func strStr(haystack string, needle string) int {
 	if len(needle) == 0 {
 		return 0
@@ -610,6 +611,20 @@ func strStr(haystack string, needle string) int {
 			}
 		}
 		if j == len(needle) {
+			return i
+		}
+	}
+	return -1
+}
+
+// Implement strStr() (easy - two pointers, string, string matching)
+// compare by parts - faster, use less memory
+func strStrSubstr(haystack string, needle string) int {
+	if len(needle) == 0 {
+		return 0
+	}
+	for i := 0; i < len(haystack)-len(needle)+1; i++ {
+		if haystack[i:i+len(needle)] == needle {
 			return i
 		}
 	}
