@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"sort"
 	"strconv"
 	"strings"
@@ -33,7 +34,8 @@ func main() {
 	//fmt.Println(generateParenthesis(2))
 	//fmt.Println(removeDuplicates([]int{1, 1, 2, 3, 3, 3}))
 	//fmt.Println(removeElement([]int{0, 1, 2, 2, 3, 0, 4, 2}, 2))
-	fmt.Println(strStrParts(`hello`, `ll`))
+	//fmt.Println(strStrParts(`hello`, `ll`))
+	fmt.Println(divide(-2147483648, 1))
 }
 
 // optimized (ez - topics: array, hash table)
@@ -629,6 +631,29 @@ func strStrParts(haystack string, needle string) int {
 		}
 	}
 	return -1
+}
+
+// Divide Two Integers (easy - math, bit manipulation)
+// divide two integers without using multiplication, division, and mod operator
+func divide(dividend int, divisor int) int {
+	result := 0
+	sign := 1
+	if dividend == math.MinInt32 && divisor == -1 {
+		return math.MaxInt32
+	}
+	if dividend < 0 {
+		dividend = abs(dividend)
+		sign *= -1
+	}
+	if divisor < 0 {
+		divisor = abs(divisor)
+		sign *= -1
+	}
+	for dividend >= divisor {
+		result++
+		dividend -= divisor
+	}
+	return sign * result
 }
 
 // utility fuctions
