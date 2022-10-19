@@ -10,19 +10,19 @@ import (
 func Flow() {
 	FileCreate()
 	FileRead()
-	Copy()
-	FormatReadWrite()
-	BufioRead()
+	//Copy()
+	//FormatReadWrite()
+	//BufioRead()
 }
 
 func FileCreate() {
 	file, err := os.Create(`hello.txt`)
+	defer file.Close()
 	text := `Hello, bro`
 	if err != nil {
 		fmt.Println(`something wrong with file: `, err)
 		os.Exit(1) // exit from here
 	}
-	defer file.Close()
 	file.WriteString(text)
 	fmt.Println(file.Name())
 }

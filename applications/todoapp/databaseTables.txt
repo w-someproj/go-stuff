@@ -1,0 +1,30 @@
+users:
+- id
+- name
+- username
+- password (probably hash)
+
+users_lists (relation):
+- id
+- user_id
+- list_id
+
+todo_lists:
+- id
+- title
+- description
+- date
+
+lists_items (relation):
+- id
+- list_id
+- item_id
+
+todo_items:
+- id
+- title
+- description
+- done
+- importance?
+
+migrate -path applications/todoapp/schema -database 'postgres://postgres:Qweazsc_1@localhost:5432/postgres?sslmode=disable' up

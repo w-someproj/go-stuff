@@ -1,0 +1,16 @@
+
+Layers:
+handler - get http request and handle it, send it to service - depends from service
+service - (business) logic of project, connect with database (repository) - depends from repository
+repository - realization of database (all functions)
+
+any layer can be changed and everything gona be ok (can change database and all still work)
+
+communication between layers throught interfaces
+
+user.go, todos.go (aka business entities) - can be used anywhere
+
+
+
+
+
